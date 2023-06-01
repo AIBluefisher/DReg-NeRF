@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="DReg-NeRF: Deep Registration for Neural Radiance Fields.">
+  <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DReg-NeRF: Deep Registration for Neural Radiance Fields</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">DReg-NeRF: Deep Registration for Neural Radiance Fields</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://aibluefisher.github.io">Yu Chen</a>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.comp.nus.edu.sg/~leegh">Gim Hee Lee</a>
+            </span>
+
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">National University of Singapore</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/AIBluefisher/DReg-NeRF"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <!-- <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="./static/videos/teaser.mp4"
+                type="video/mp4">
+      </video> -->
+      <!-- <div class="column is-3 has-text-centered"> -->
+        <img src="./static/images/teaser.png"
+             class="interpolation-image"
+             alt="Interpolation end reference image."/>
+      <!-- </div> -->
+      <h2 class="subtitle has-text-centered">
+        <span class="dnerf">DReg-NeRF</span> registers multiple NeRFs into a global coordinate frame.
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Although Neural Radiance Fields (NeRF) is popular in the computer vision community recently, 
+            registering multiple NeRFs has yet to gain much attention. The proposed method
+            can potentially be applied to large-scale scenarios, where the NeRF models are trained individually and 
+            all queried points must be in the same coordinate frame. Unlike the existing work, NeRF2NeRF,
+            which is based on traditional optimization methods and needs human annotated keypoints, we try to 
+            solve the NeRF registration problem without human intervention. Our proposed method, DReg-NeRF, 
+            first extracts features from the occupancy grid in NeRF. Subsequently, our DReg-NeRF utilizes a 
+            transformer architecture with self-attention and cross-attention layers to learn the relations 
+            between pairwise NeRF blocks. In contrast to state-of-the-art (SOTA) point cloud registration methods, 
+            the decoupled correspondences are supervised by surface fields without any ground truth overlapping labels.
+          </p>
+        </div>
+        <img src="./static/images/network_architecture.png"
+        class="interpolation-image"
+        alt="Interpolation end reference image."/>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper video. -->
+    <!-- <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+          <iframe src=""
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div> -->
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <!-- Animation. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Animation</h2>
+
+        <p>
+            <b>Top:</b> Images rendered after registration with ground-truth transformation;
+            <br/>
+            <b>Middle:</b> Images rendered after registration with our estimated transformation;
+            <br/>
+            <b>Bottom:</b> Images rendered without registration.
+        </p>
+        <br/>
+
+        <!-- <h3 class="title is-4">Re-rendering the images after registration</h3> -->
+        
+        <!------------------------------------ Odeon Lightable --------------------------->
+        <h3 class="title is-4">Odeon Lightable</h3>
+
+        <div class="content has-text-centered">
+          <h4 class="title is-5">Re-rendering the images after registration</h4>
+          <table class="caption" style="width: 80%; margin: 0 auto -2pt auto; font-size: 80%;">
+            <tbody><tr>
+                <td style="width: 25%"><b>rendered image</b></td>
+                <td style="width: 25%"><b>rendered depth</b></td>
+                <td style="width: 25%"><b>rendered image</b></td>
+                <td style="width: 25%"><b>rendered depth</b></td>
+            </tr>
+          </tbody></table>
+          <video width="80%" loop="" muted="" autoplay="" height="100%">
+            <source src="./static/videos/26851W_Odeon_Lightab66/gt_src_tgt_rgb_depth.mp4" type="video/mp4">
+          </video>
+          <video width="80%" loop="" muted="" autoplay="" height="100%">
+            <source src="./static/videos/26851W_Odeon_Lightab66/aligned_src_tgt_rgb_depth.mp4" type="video/mp4">
+          </video>
+          <video width="80%" loop="" muted="" autoplay="" height="100%">
+            <source src="./static/videos/26851W_Odeon_Lightab66/unaligned_src_tgt_rgb_depth.mp4" type="video/mp4">
+          </video>
+          <br/> <br/> <br/>
+          
+          <h4 class="title is-5">Camera poses before/after registration</h4>
+          <table class="caption" style="width: 80%; margin: 0 auto -2pt auto; font-size: 80%;">
+            <tbody><tr>
+                <td style="width: 46%"><b>Before Registration</b></td>
+                <td style="width: 46%"><b>After Registration</b></td>
+            </tr>
+          </tbody></table>
+          <video width="46%" loop="" muted="" autoplay="" height="100%">
+            <source src="./static/videos/26851W_Odeon_Lightab66/animation_unaligned.mp4" type="video/mp4">
+          </video>
+          <video width="46%" loop="" muted="" autoplay="" height="100%">
+            <source src="./static/videos/26851W_Odeon_Lightab66/animation_aligned.mp4" type="video/mp4">
+          </video>
+        </div>
+        
+        <!------------------------------------ Banana_for_scale0a07 --------------------------->
+        <h3 class="title is-4">Banana for Sale</h3>
+
+        <div class="content has-text-centered">
+          <h4 class="title is-5">Re-rendering the images after registration</h4>
+          <table class="caption" style="width: 80%; margin: 0 auto -2pt auto; font-size: 80%;">
+            <tbody><tr>
+                <td style="width: 25%"><b>rendered image</b></td>
+                <td style="width: 25%"><b>rendered depth</b></td>
+                <td style="width: 25%"><b>rendered image</b></td>
+                <td style="width: 25%"><b>rendered depth</b></td>
+            </tr>
+          </tbody></table>
+
+          <video width="80%" loop="" muted="" autoplay="">
+            <source src="./static/videos/Banana_for_scale0a07/gt_src_tgt_rgb_depth.mp4" type="video/mp4">
+          </video>
+          <video width="80%" loop="" muted="" autoplay="">
+            <source src="./static/videos/Banana_for_scale0a07/aligned_src_tgt_rgb_depth.mp4" type="video/mp4">
+          </video>
+          <video width="80%" loop="" muted="" autoplay="">
+            <source src="./static/videos/Banana_for_scale0a07/unaligned_src_tgt_rgb_depth.mp4" type="video/mp4">
+          </video>
+          <br/> <br/> <br/>
+          
+          <h4 class="title is-5">Camera poses before/after registration</h4>
+          <table class="caption" style="width: 80%; margin: 0 auto -2pt auto; font-size: 80%;">
+            <tbody><tr>
+                <td style="width: 46%"><b>Before Registration</b></td>
+                <td style="width: 46%"><b>After Registration</b></td>
+            </tr>
+          </tbody></table>
+          <video width="46%" loop="" muted="" autoplay="" height="100%">
+            <source src="./static/videos/Banana_for_scale0a07/animation_unaligned.mp4" type="video/mp4">
+          </video>
+          <video width="46%" loop="" muted="" autoplay="" height="100%">
+            <source src="./static/videos/Banana_for_scale0a07/animation_aligned.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <!------------------------------------ Banana_for_scale0a07 --------------------------->
+        <h3 class="title is-4">Figura San Juan</h3>
+
+        <div class="content has-text-centered">
+          <h4 class="title is-5">Re-rendering the images after registration</h4>
+          <table class="caption" style="width: 80%; margin: 0 auto -2pt auto; font-size: 80%;">
+            <tbody><tr>
+                <td style="width: 25%"><b>rendered image</b></td>
+                <td style="width: 25%"><b>rendered depth</b></td>
+                <td style="width: 25%"><b>rendered image</b></td>
+                <td style="width: 25%"><b>rendered depth</b></td>
+            </tr>
+          </tbody></table>
+
+          <video width="80%" loop="" muted="" autoplay="">
+            <source src="./static/videos/Figura_San_Juan260d/gt_src_tgt_rgb_depth.mp4" type="video/mp4">
+          </video>
+          <video width="80%" loop="" muted="" autoplay="">
+            <source src="./static/videos/Figura_San_Juan260d/aligned_src_tgt_rgb_depth.mp4" type="video/mp4">
+          </video>
+          <video width="80%" loop="" muted="" autoplay="">
+            <source src="./static/videos/Figura_San_Juan260d/unaligned_src_tgt_rgb_depth.mp4" type="video/mp4">
+          </video>
+          <br/> <br/> <br/>
+          
+          <h4 class="title is-5">Camera poses before/after registration</h4>
+          <table class="caption" style="width: 80%; margin: 0 auto -2pt auto; font-size: 80%;">
+            <tbody><tr>
+                <td style="width: 46%"><b>Before Registration</b></td>
+                <td style="width: 46%"><b>After Registration</b></td>
+            </tr>
+          </tbody></table>
+          <video width="46%" loop="" muted="" autoplay="" height="100%">
+            <source src="./static/videos/Figura_San_Juan260d/animation_unaligned.mp4" type="video/mp4">
+          </video>
+          <video width="46%" loop="" muted="" autoplay="" height="100%">
+            <source src="./static/videos/Figura_San_Juan260d/animation_aligned.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <!-- Re-rendering. -->
+        <!-- <h3 class="title is-4">Re-rendering the input video</h3>
+        <div class="content has-text-justified">
+          <p>
+            Using <span class="dnerf">Nerfies</span>, you can re-render a video from a novel
+            viewpoint such as a stabilized camera by playing back the training deformations.
+          </p>
+        </div>
+        <div class="content has-text-centered">
+          <video id="replay-video"
+                 controls
+                 muted
+                 preload
+                 playsinline
+                 width="75%">
+            <source src="./static/videos/replay.mp4"
+                    type="video/mp4">
+          </video>
+        </div> -->
+        <!--/ Re-rendering. -->
+
+      </div>
+    </div>
+    <!--/ Animation. -->
+
+
+    <!-- Concurrent Work. -->
+    <!-- <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Related Links</h2>
+
+        <div class="content has-text-justified">
+          <p>
+            There's a lot of excellent work that was introduced around the same time as ours.
+          </p>
+          <p>
+            <a href="https://arxiv.org/abs/2104.09125">Progressive Encoding for Neural Optimization</a> introduces an idea similar to our windowed position encoding for coarse-to-fine optimization.
+          </p>
+          <p>
+            <a href="https://www.albertpumarola.com/research/D-NeRF/index.html">D-NeRF</a> and <a href="https://gvv.mpi-inf.mpg.de/projects/nonrigid_nerf/">NR-NeRF</a>
+            both use deformation fields to model non-rigid scenes.
+          </p>
+        </div>
+      </div>
+    </div> -->
+    <!--/ Concurrent Work. -->
+
+  </div>
+</section>
+
+
+<!-- <section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code></code></pre>
+  </div>
+</section> -->
+
+
+<footer class="footer">
+  <div class="columns is-centered">
+    <p>
+      Code is borrowed from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>.
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
