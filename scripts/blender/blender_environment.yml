@@ -1,0 +1,11 @@
+name: blender
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10.2
+  - pip=22.2.2
+  - cudatoolkit-dev=11.4
+  - pyzmq=24.0.1
+  - pip:
+    - bpy-3.4.0a0-cp310-cp310-manylinux_2_31_x86_64.whl

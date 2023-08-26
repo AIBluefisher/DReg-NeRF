@@ -1,0 +1,28 @@
+{
+    "scannerf": {
+        "train": [
+            "airplane2-023", "brontosaurus-030", "bulldozer1-022", 
+            "cheetah-017",  "dump_truck2-035", "elephant-024", "excavator-004",
+            "forklift-029", "giraffe-020",   "lego-013", "lion-011",
+            "plant1-033", "plant2-026", "plant3-006", "plant4-003", "plant5-019",
+            "roadroller-014", "shark-010",
+            "spinosaurus-008", "stegosaurus-007", "tiger-018", "tractor-012", "trex-009",
+            "triceratops-021", "truck-032",
+            "dump_truck1-034", "helicopter1-015",  "zebra-028",
+            "airplane1-005", "bulldozer2-016", "helicopter2-002",
+            "plant6-027", "plant7-001", "plant8-025", "plant9-031"
+        ],
+        "test": [
+            "airplane2-023", "brontosaurus-030", "bulldozer1-022", 
+            "cheetah-017",  "dump_truck2-035", "elephant-024", "excavator-004",
+            "forklift-029", "giraffe-020",   "lego-013", "lion-011",
+            "plant1-033", "plant2-026", "plant3-006", "plant4-003", "plant5-019",
+            "roadroller-014", "shark-010",
+            "spinosaurus-008", "stegosaurus-007", "tiger-018", "tractor-012", "trex-009",
+            "triceratops-021", "truck-032",
+            "dump_truck1-034", "helicopter1-015",  "zebra-028",
+            "airplane1-005", "bulldozer2-016", "helicopter2-002",
+            "plant6-027", "plant7-001", "plant8-025", "plant9-031"
+        ]
+    }
+}
