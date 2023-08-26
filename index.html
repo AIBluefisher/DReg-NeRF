@@ -86,7 +86,7 @@
                 </a>
               </span>
               <span class="link-block">
-                <a href=""
+                <a href="https://arxiv.org/abs/2308.09386"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="ai ai-arxiv"></i>
@@ -116,7 +116,7 @@
               </span>
               <!-- Dataset Link. -->
               <span class="link-block">
-                <a href=""
+                <a href="https://drive.google.com/drive/u/1/folders/1iQ7TlcqCbbKDBnEt4QBxaV2k1N1vQZzm"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="far fa-images"></i>
@@ -161,16 +161,18 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Although Neural Radiance Fields (NeRF) is popular in the computer vision community recently, 
-            registering multiple NeRFs has yet to gain much attention. The proposed method
-            can potentially be applied to large-scale scenarios, where the NeRF models are trained individually and 
-            all queried points must be in the same coordinate frame. Unlike the existing work, NeRF2NeRF,
-            which is based on traditional optimization methods and needs human annotated keypoints, we try to 
-            solve the NeRF registration problem without human intervention. Our proposed method, DReg-NeRF, 
-            first extracts features from the occupancy grid in NeRF. Subsequently, our DReg-NeRF utilizes a 
-            transformer architecture with self-attention and cross-attention layers to learn the relations 
-            between pairwise NeRF blocks. In contrast to state-of-the-art (SOTA) point cloud registration methods, 
-            the decoupled correspondences are supervised by surface fields without any ground truth overlapping labels.
+            Although Neural Radiance Fields (NeRF) is popular in
+            the computer vision community recently, registering multiple NeRFs has yet to gain much attention. Unlike the
+            existing work, NeRF2NeRF, which is based on traditional optimization methods and needs human annotated
+            keypoints, we propose DReg-NeRF to solve the NeRF registration problem on object-centric scenes without human
+            intervention. After training NeRF models, our DReg-NeRF
+            first extracts features from the occupancy grid in NeRF. Subsequently, our DReg-NeRF utilizes a transformer architecture with self-attention and cross-attention layers to learn
+            the relations between pairwise NeRF blocks. In contrast
+            to state-of-the-art (SOTA) point cloud registration methods,
+            the decoupled correspondences are supervised by surface
+            fields without any ground truth overlapping labels. We construct a novel view synthesis dataset with 1,700+ 3D objects
+            obtained from Objaverse to train our network. When evaluated on the test set, our proposed method beats the SOTA
+            point cloud registration methods by a large margin.
           </p>
         </div>
         <img src="./static/images/network_architecture.png"
@@ -191,6 +193,21 @@
       </div>
     </div> -->
     <!--/ Paper video. -->
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Dataset Overview</h2>
+        <img src="./static/images/dataset_overview.png"
+        class="interpolation-image"
+        alt="Interpolation end reference image."/>
+        <div class="content has-text-justified">
+          <p>
+            Training images are rendered from 3D objects (~30 categories, 1700+ objects) of the Objaverse dataset (800K+ 3D models with descriptive captions, tags).
+          </p>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -201,7 +218,7 @@
     <!-- Animation. -->
     <div class="columns is-centered">
       <div class="column is-full-width">
-        <h2 class="title is-3">Animation</h2>
+        <h2 class="title is-3">Results Animation</h2>
 
         <p>
             <b>Top:</b> Images rendered after registration with ground-truth transformation;
