@@ -15,7 +15,7 @@ cd DReg-NeRF/scripts
 ./scripts/env/install.sh
 ```
 
-After installing the environment, you can **try our [pretrained model](https://drive.google.com/drive/folders/1fS7xg8pPXPPkReSuQLSONZHMaqJoaaJI?usp=drive_link) by following [# 4.2](#42-evaluation)** if you don't want to re-train all the NeRF models from scratch.
+After installing the environment, you can **try our [pretrained model](https://drive.google.com/file/d/13OC3eKhqEhcB7WLPSkk3xGrHhaveG_Eh/view?usp=sharing) by following [# 4.2](#42-evaluation)** if you don't want to re-train all the NeRF models from scratch.
 
 ## 2. Fetch 3D Models from Objaverse
 
