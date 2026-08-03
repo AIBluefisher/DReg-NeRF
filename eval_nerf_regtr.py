@@ -1,7 +1,10 @@
 import os
+import sys
 import random
 import json
 import time
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 import numpy as np
 import torch
